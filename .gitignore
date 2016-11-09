@@ -21,4 +21,4 @@ tmp/*
 .byebug_history
 log/
 tmp/
-.idea/workspace.xml
+.idea/
