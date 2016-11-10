@@ -7,4 +7,8 @@ class HomesController < ApplicationController
   def show
     add_breadcrumb "Show", :movies_path
   end
+
+  def not_found
+
+  end
 end

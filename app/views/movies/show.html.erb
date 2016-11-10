@@ -43,10 +43,16 @@
         <% else %>
             <% @reviews.each do |review| %>
                 <div class="reviews">
+                  <em> <%= review.user.email %> </em>
                   <div class="star-rating" data-score= <%= review.rating %> ></div>
-                  <p><%= review.comment %></p>
+                  <p><%= review.comment %>
+                    <% if user_signed_in?  %>
+                      <% if current_user.email == review.user.email %>
+                          <%= link_to 'Remove', review, method: :delete, data: { confirm: 'Are you sure?' } %>
+                      <% end %>
+                        <% end %>
+                  </p>
                 </div>
-                <%= link_to 'Remove', review, method: :delete, data: { confirm: 'Are you sure?' } %>
             <% end %>
         <% end %>
       </div>

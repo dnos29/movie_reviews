@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   post '/rate' => 'rater#create', :as => 'rate'
+  get '/not_found' => 'homes#not_found'
   resources :reviews, except: [:show, :index]
   devise_for :users
   root 'homes#index'

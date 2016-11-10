@@ -1,0 +1,13 @@
+<div class="row fill">
+  <div class="col-lg-4">
+    <%= simple_form_for :search, url: movies_path, :method => :get do |f| %>
+        <div class="input-group">
+          <%= f.text_field :title, placeholder: 'Seach', class: 'form-control' %>
+
+          <span class="input-group-btn">
+              <%= f.button :submit, 'Search', class: 'btn btn-default' %>
+            </span>
+        </div>
+    <% end %>
+  </div>
+</div>

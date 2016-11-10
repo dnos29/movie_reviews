@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
-  before_action :set_movie
+  before_action :set_movie, except: :destroy
   before_action :authenticate_user!
   # GET /reviews
   # GET /reviews.json
@@ -55,7 +55,7 @@ class ReviewsController < ApplicationController
   def destroy
     @review.destroy
     respond_to do |format|
-      format.html { redirect_to  @movie, notice: 'Review was successfully destroyed.' }
+      format.html { redirect_to  root_path, notice: 'Review was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

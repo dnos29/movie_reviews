@@ -2,7 +2,7 @@ class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index,:show]
 
-  add_breadcrumb "Movie", :movies_path
+  add_breadcrumb "Home", :root_path
   def search
     if params[:search].present?
       @movie = Movie.search(params[:search])
