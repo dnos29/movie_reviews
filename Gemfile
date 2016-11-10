@@ -46,3 +46,6 @@ gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'simple_form'
 gem "paperclip", "~> 5.0.0"
+gem 'ratyrate'
+gem 'searchkick', '~> 1.4'
+gem 'breadcrumbs_on_rails', '~> 3.0', '>= 3.0.1'

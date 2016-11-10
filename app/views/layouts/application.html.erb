@@ -13,12 +13,11 @@
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <a class="navbar-brand" href="/movies/">Movie Review</a>
+        <a class="navbar-brand" href="/">Movie Review</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
-
         <ul class="nav navbar-nav">
           <% if user_signed_in? %>
               <li> <%= current_user.email %> </li>
@@ -45,6 +44,9 @@
       </div>
   <% end %>
   <div class="container">
+    <ol class="breadcrumb">
+      <%= render_breadcrumbs :tag => :li, :separator => "" %>
+    </ol>
     <%= yield %>
   </div>
   </body>

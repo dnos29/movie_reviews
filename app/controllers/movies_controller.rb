@@ -1,14 +1,31 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index,:show]
+
+  add_breadcrumb "Movie", :movies_path
+  def search
+    if params[:search].present?
+      @movie = Movie.search(params[:search])
+    else
+      @movie = Movie.all
+    end
+  end
   def index
     @movies = Movie.search(params[:search])
   end
 
   def show
+    add_breadcrumb "Show", :movie_path
+    @reviews = Review.where(movie_id: @movie.id).order("created_at DESC")
+    if @reviews.blank?
+      @avg_rating = 0
+    else
+      @avg_rating = @reviews.average(:rating)
+    end
   end
 
   def new
+    add_breadcrumb "New", :new_movie_path
     @movie = current_user.movies.build
   end
 
