@@ -1,7 +1,7 @@
 class HomesController < ApplicationController
   def index
     add_breadcrumb "Home", :root_path
-    @movies = Movie.all
+    @movies = Movie.paginate(:page => params[:page])
   end
 
   def show
@@ -10,5 +10,9 @@ class HomesController < ApplicationController
 
   def not_found
 
+  end
+
+  def test_mobile
+    @movies = Movie.paginate(:page => params[:page])
   end
 end

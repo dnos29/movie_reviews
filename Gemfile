@@ -50,3 +50,5 @@ gem 'ratyrate'
 gem 'searchkick', '~> 1.4'
 gem 'breadcrumbs_on_rails', '~> 3.0', '>= 3.0.1'
 gem "cancan"
+gem 'will_paginate', '~> 3.1.0'
+gem 'bootstrap-will_paginate'

@@ -3,6 +3,7 @@ class MoviesController < ApplicationController
   before_action :authenticate_user!, except: [:index,:show]
 
   add_breadcrumb "Home", :root_path
+
   def search
     if params[:search].present?
       @movie = Movie.search(params[:search])
@@ -11,12 +12,16 @@ class MoviesController < ApplicationController
     end
   end
   def index
+    authorize! :index ,Movie
     @movies = Movie.search(params[:search])
   end
 
   def show
     add_breadcrumb "Show", :movie_path
     @reviews = Review.where(movie_id: @movie.id).order("created_at DESC")
+
+    @video_id = (/([\w-]{11})/.match(@movie.url)).to_s
+    @embed_code = "<iframe width='640' height='360' src='http://www.youtube.com/embed/#{@video_id}' frameborder='0' allowfullscreen></iframe>"
     if @reviews.blank?
       @avg_rating = 0
     else
@@ -30,6 +35,7 @@ class MoviesController < ApplicationController
   end
 
   def edit
+    authorize! :edit ,Movie
   end
 
   def create
@@ -49,6 +55,7 @@ class MoviesController < ApplicationController
   # PATCH/PUT /movies/1
   # PATCH/PUT /movies/1.json
   def update
+    authorize! :update ,Movie
     respond_to do |format|
       if @movie.update(movie_params)
         format.html { redirect_to @movie, notice: 'Movie was successfully updated.' }
@@ -63,6 +70,7 @@ class MoviesController < ApplicationController
   # DELETE /movies/1
   # DELETE /movies/1.json
   def destroy
+    authorize! :destroy ,Movie
     @movie.destroy
     respond_to do |format|
       format.html { redirect_to movies_url, notice: 'Movie was successfully destroyed.' }

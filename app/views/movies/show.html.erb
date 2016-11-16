@@ -2,7 +2,7 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-md-4">
-        <%= image_tag @movie.image.url(:square) %>
+        <%= image_tag @movie.image.url(:square),class: "star-rating" %>
         <div class="star-rating" data-score= <%= @avg_rating %> > </div>
         <em><%= "#{@reviews.length} reviews" %></em>
         <div class="table-responsive">
@@ -35,8 +35,11 @@
       </div>
       <div class="col-md-7 col-md-offset-1">
         <h1 class="review_title"><%= @movie.title %></h1>
+        <div class="embed-responsive embed-responsive-16by9">
+          <!--<iframe width="560" height="315" src="https://www.youtube.com/embed/sXd2WxoOP5g" frameborder="0" allowfullscreen></iframe>-->
+          <%= raw(@embed_code) %>
+        </div>
         <p><h2>Reviews</h2></p>
-
         <% if @reviews.blank? %>
             <h3>No reviews just yet, would you like to add the first!</h3>
             <%= link_to "Write Review", new_movie_review_path(@movie), class: "btn btn-danger" %>

@@ -1,12 +1,17 @@
-<%= render 'search' %>
-<br>
-<div class="row">
-  <% @movies.each do |movie| %>
-      <div class="col-md-3">
-        <div class="thumbnail">
+<% @movies.each_slice(3) do |movies| %>
+    <div class="row">
+      <%  movies.each do |movie| %>
+          <div class="col-md-4 portfolio-item">
+            <div class="thumbnail">
+              <%= link_to (image_tag movie.image.url(:rectangle)), movie,class:"img-responsive" %>
 
-          <%= link_to (image_tag movie.image.url(:square)), movie %>
-        </div>
-      </div>
-  <% end %>
-</div>
+              <h3>
+                <%= link_to movie.title, movie %></td>
+              </h3>
+              <p><%= movie.description[0..122] %></p>
+            </div>
+          </div>
+      <% end %>
+    </div>
+<% end %>
+<%= will_paginate @movies, :previous_label => t(:previous), :next_label => t(:next), class: 'pull-right' %>
