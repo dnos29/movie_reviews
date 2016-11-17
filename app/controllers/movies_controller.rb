@@ -71,7 +71,14 @@ class MoviesController < ApplicationController
   # DELETE /movies/1
   # DELETE /movies/1.json
   def destroy
-    authorize! :destroy ,Movie
+    #authorize! :destroy ,Movie
+    if  current_user.id != @movie.user_id
+      respond_to do |format|
+        format.html { redirect_to '/not_found' , alert: "deo co quyen nhe" }
+        format.json { head :no_content }
+      end
+      return
+    end
     @movie.destroy
     respond_to do |format|
       format.html { redirect_to movies_url, notice: 'Movie was successfully destroyed.' }

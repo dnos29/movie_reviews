@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161117094133) do
+ActiveRecord::Schema.define(version: 20161117162558) do
 
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 20161117094133) do
     t.float    "overall_avg",   null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "permissions", force: :cascade do |t|
+    t.integer  "user_group_id"
+    t.integer  "role_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["role_id"], name: "index_permissions_on_role_id"
+    t.index ["user_group_id"], name: "index_permissions_on_user_group_id"
   end
 
   create_table "rates", force: :cascade do |t|

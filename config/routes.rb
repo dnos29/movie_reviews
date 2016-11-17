@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :permissions
   resources :user_roles
   get 'user_roles/index'
 
