@@ -3,6 +3,7 @@ class CreateUserRoles < ActiveRecord::Migration[5.0]
     create_table :user_roles do |t|
       t.references :user, foreign_key: true
       t.references :role, foreign_key: true
+
       t.timestamps
     end
   end

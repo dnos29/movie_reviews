@@ -17,6 +17,7 @@ class MoviesController < ApplicationController
   end
 
   def show
+    authorize! :show ,Movie
     add_breadcrumb "Show", :movie_path
     @reviews = Review.where(movie_id: @movie.id).order("created_at DESC")
 

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_roles
   get 'user_roles/index'
 
   resources :roles
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
     end
     resources :reviews, except: [:show, :index]
   end
-   resource :user_roles , except: [:show, :index]
+   resource :user_roles
   # get '/user_roles' => "user_roles#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
