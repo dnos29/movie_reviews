@@ -30,7 +30,7 @@
             </tr>
             </tbody>
           </table>
-          <%= link_to "Write a review", new_movie_review_path(@movie) %>
+          <%= link_to "Write a review", new_movie_review_path(@movie), class: "btn btn-danger" %>
         </div>
       </div>
       <div class="col-md-7 col-md-offset-1">
@@ -63,7 +63,7 @@
   </div>
   </div>
 
-<%= link_to 'Edit', edit_movie_path(@movie) %> |
+<%= link_to 'Edit', edit_movie_path(@movie), class: "btn btn-info" %> |
 <%= link_to 'Back', movies_path %>
 <script>
   $('.star-rating').raty({

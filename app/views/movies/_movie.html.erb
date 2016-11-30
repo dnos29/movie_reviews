@@ -1,0 +1,29 @@
+<table class="table table-bordered table-striped fill">
+  <thead>
+  <tr>
+    <th class="text-center"><%= sortable "title" %></th>
+    <th class="text-center">Image</th>
+    <th class="text-center"><%= sortable "description" %></th>
+    <th class="text-center"><%= sortable "length" %></th>
+    <th class="text-center"><%= sortable "release_year" %></th>
+    <th class="text-center"><%= sortable "user_id" %></th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @movies.each do |movie| %>
+      <tr>
+        <td><%= movie.title %></td>
+        <td><%= image_tag movie.image.url(:thumb) %></td>
+        <td><%= movie.description %></td>
+        <td><%= movie.length %></td>
+        <td><%= movie.release_year %></td>
+        <td><%= movie.user.email %></td>
+        <td><%= link_to 'Show', movie %></td>
+        <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
+        <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

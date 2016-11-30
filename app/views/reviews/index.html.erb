@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Reviews</h1>
-
+<%= link_to (raw("<button type=\"button\" class=\"btn btn-default\"><span class=\"glyphicon glyphicon-plus\"></span> " + "New" + "</button>")), new_review_path %>
+<p></p>
 <table>
   <thead>
     <tr>
@@ -25,5 +26,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Review', new_review_path %>

@@ -13,6 +13,7 @@ class HomesController < ApplicationController
   end
 
   def test_mobile
-    @movies = Movie.paginate(:page => params[:page])
+    @roles = Role.all
+    @role = Role.new
   end
 end

@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Permissions</h1>
-
+<%= link_to (raw("<button type=\"button\" class=\"btn btn-default\"><span class=\"glyphicon glyphicon-plus\"></span> " + "New" + "</button>")), new_permission_path %>
+<p></p>
 <table class="table table-bordered table-striped fill">
   <thead>
     <tr>
@@ -24,6 +25,3 @@
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Permission', new_permission_path %>

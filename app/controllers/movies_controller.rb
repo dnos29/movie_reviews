@@ -1,4 +1,5 @@
 class MoviesController < ApplicationController
+  helper_method :sort_column, :sort_direction
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index,:show]
 
@@ -13,11 +14,11 @@ class MoviesController < ApplicationController
   end
   def index
     authorize! :index ,Movie
-    @movies = Movie.search(params[:search])
+    @movies = Movie.search(params[:search]).order(sort_column + " " + sort_direction)
   end
 
   def show
-    authorize! :show ,Movie
+    # authorize! :show ,Movie
     add_breadcrumb "Show", :movie_path
     @reviews = Review.where(movie_id: @movie.id).order("created_at DESC")
 
@@ -31,15 +32,24 @@ class MoviesController < ApplicationController
   end
 
   def new
+    authorize! :new ,Movie
     add_breadcrumb "New", :new_movie_path
     @movie = current_user.movies.build
   end
 
   def edit
     authorize! :edit ,Movie
+    if  current_user.id != @movie.user_id
+      respond_to do |format|
+        format.html { redirect_to '/not_found' , alert: "Ban khong co quyen nay" }
+        format.json { head :no_content }
+      end
+      return
+    end
   end
 
   def create
+    authorize! :create, Movie
     @movie = current_user.movies.build(movie_params)
 
     respond_to do |format|
@@ -71,10 +81,10 @@ class MoviesController < ApplicationController
   # DELETE /movies/1
   # DELETE /movies/1.json
   def destroy
-    #authorize! :destroy ,Movie
+    authorize! :destroy ,Movie
     if  current_user.id != @movie.user_id
       respond_to do |format|
-        format.html { redirect_to '/not_found' , alert: "deo co quyen nhe" }
+        format.html { redirect_to '/not_found' , alert: "Ban khong co quyen nay" }
         format.json { head :no_content }
       end
       return
@@ -94,6 +104,13 @@ class MoviesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movie_params
-      params.require(:movie).permit(:title, :description, :length, :release_year, :rating, :image)
+      params.require(:movie).permit(:title, :description, :length, :release_year, :rating, :image,:url )
+    end
+
+    def sort_column
+      params[:sort] || "title"
+    end
+    def sort_direction
+      params[:direction] || "asc"
     end
 end

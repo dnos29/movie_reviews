@@ -31,14 +31,16 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav pull-right">
             <% if user_signed_in? %>
-                <li> <%= link_to current_user.email,"#" %></li>
-                <% if current_user.email =="admin@email.com" %>
+                <% if current_user.user_group.name =="admin" %>
                     <li> <%= link_to "Manage Movie",movies_path %> </li>
+                    <li> <%= link_to "Manage Role",roles_path %> </li>
+                    <li> <%= link_to "Manage Permission",permissions_path %> </li>
                 <% end %>
+                <li> <%= link_to current_user.email,"#" %></li>
                 <li><%= link_to "Logout", destroy_user_session_path, :method => 'delete' %></li>
                 </ul>
             <% else %>
-                <li><%= link_to "Sign in", new_user_session_path %></li>
+                <li><%= link_to "Log in", new_user_session_path %></li>
                 <li><%= link_to "Sign up", new_user_registration_path%></li>
             <% end %>
           </ul>
