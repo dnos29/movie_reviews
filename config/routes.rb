@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post '/rate' => 'rater#create', :as => 'rate'
   get '/not_found' => 'homes#not_found'
   get '/test_mobile' => 'homes#test_mobile'
+  get '/test_ajax' => 'homes#test_ajax'
   resources :reviews, except: [:show, :index]
   devise_for :users
   root 'homes#index'

@@ -14,7 +14,7 @@ class MoviesController < ApplicationController
   end
   def index
     authorize! :index ,Movie
-    @movies = Movie.search(params[:search]).order(sort_column + " " + sort_direction)
+    @movies = Movie.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:page => params[:page])
   end
 
   def show
