@@ -1,6 +1,13 @@
 <div class="row">
   <div id="the-basics" class="col-sm-4">
-    <input class="form-control typeahead" type="text" placeholder="search movie">
+    <%= simple_form_for :search,:remote => true, url: root_path,:html =>{id: 'movie_search'}, :method => :get do |f| %>
+        <div class="input-group">
+        <%= f.text_field :title, placeholder: 'Search',autocomplete:"off", class: 'form-control typeahead',id:'search',:value => (params[:search].nil?)?'':params[:search][:title] %>
+          <span class="input-group-btn">
+              <%= f.button :submit, 'Search', class: 'btn btn-default' %>
+            </span>
+        </div>
+    <% end %>
   </div>
 </div>
 <br>
@@ -22,6 +29,39 @@
 <% end %>
 <%= will_paginate @movies, :previous_label => t(:previous), :next_label => t(:next), class: 'pull-right' %>
 
-<script>
+<div id="results">
+</div>
+<style>
+  ul.ui-autocomplete {
+    position: absolute;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: solid 1px #999;
+    cursor: default;
+  }
+  ul.ui-autocomplete li {
+    background-color: #FFF;
+    border-top: solid 1px #DDD;
+    margin: 0;
+    padding: 0;
+  }
+  ul.ui-autocomplete a {
+    color: #000;
+    display: block;
+    padding: 3px;
+  }
+  ul.ui-autocomplete a.ui-state-hover,ul.ui-autocomplete  a.ui-state-active {
+    background-color: #FFFCB2;
+  }
+  .ui-helper-hidden-accessible { display:none; }
 
+</style>
+
+<script>
+  $(document).ready(function () {
+    $('#search').change(function () {
+        $('#movie_search').submit();
+    });
+  })
 </script>

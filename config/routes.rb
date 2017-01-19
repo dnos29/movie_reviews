@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get '/not_found' => 'homes#not_found'
   get '/test_mobile' => 'homes#test_mobile'
   get '/test_ajax' => 'homes#test_ajax'
+  get '/autosearch' => 'homes#autosearch'
+  get 'finalexam' => 'homes#final_exam'
   resources :reviews, except: [:show, :index]
   devise_for :users
   root 'homes#index'

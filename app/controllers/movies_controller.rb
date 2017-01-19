@@ -15,6 +15,10 @@ class MoviesController < ApplicationController
   def index
     authorize! :index ,Movie
     @movies = Movie.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:page => params[:page])
+    respond_to do |format|
+      format.html
+      format.js { render :layout => false }
+    end
   end
 
   def show
